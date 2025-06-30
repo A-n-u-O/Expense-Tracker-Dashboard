@@ -17,8 +17,11 @@ export const AddTransactionForm = () => {
 
     if (!category || !amount || !date) return alert("Please fill all fields.");
 
+    //only generate id on client side
+    const id = typeof window !== "undefined" ? crypto.randomUUID() : "";
+
     addTransaction({
-      id: crypto.randomUUID(),
+      id,
       type,
       category,
       amount: parseFloat(amount),
