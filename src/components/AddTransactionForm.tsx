@@ -45,7 +45,7 @@ export const AddTransactionForm = () => {
   return (
     <form
       onSubmit={handleSubmit}
-      className=" bg-white p-6 rounded-lg shadow-md space-y-4 max-w-md w-full">
+      className=" bg-white p-6 rounded-lg shadow-md space-y-4 max-w-5xl w-full">
       <h2 className=" text-xl font-semibold text-gray-800">Add Transaction</h2>
       {successMessage && (
         <div className=" bg-green-100 text-green-700 px-4 py-2 rounded">

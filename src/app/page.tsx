@@ -9,7 +9,8 @@ import { TransactionList } from "@/components/TransactionList";
 
 export default function Home() {
   return (
-    <main className=" flex flex-col min-h-screen items-center justify-between p-8 bg-blue-100">
+    <main className=" flex flex-col min-h-screen items-center justify-center bg-blue-100">
+      <h1 className=" mb-20 font-extralight text-8xl">Expense Tracker Dashboard</h1>
       <AddTransactionForm /> {/* <TestComponent /> */}
       <Summary/>
       <Chart/>

@@ -45,7 +45,7 @@ export const Chart = () => {
     ],
   };
   return (
-    <div className=" mt-2 bg-white p-3 rounded-lg shadow-md max-w-md w-full">
+    <div className=" mt-20 bg-white p-6 rounded-lg shadow-md max-w-5xl w-full">
       <h2 className=" text-lg font-semibold text-gray-800 mb-4">
         Expense Breakdown by category
       </h2>{" "}

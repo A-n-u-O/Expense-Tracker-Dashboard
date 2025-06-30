@@ -21,7 +21,7 @@ export const TransactionList = () => {
     );
   }
   return (
-    <div className=" mt-6 ml-5 w-full max-w-md space-y-4">
+    <div className=" mt-20 ml-5 w-full max-w-5xl space-y-4">
       <h2 className=" text-lg font-semibold text-gray-800">Transactions</h2>
       {transactions.map((tx) => (
         <div

@@ -15,7 +15,7 @@ export const Summary = () => {
 
   const balance = income - expense;
   return (
-    <div className=" bg-white p-6 rounded-lg shadow-md max-w-md w-full mt-6">
+    <div className=" bg-white p-6 rounded-lg shadow-md max-w-5xl w-full mt-20">
       <h2 className=" text-lg font-semibold text-gray-800 mb-4">Summary</h2>
       <div className=" flex justify-between mb-2">
         <span className=" text-green-600 font-semibold"> Total Income:</span>
