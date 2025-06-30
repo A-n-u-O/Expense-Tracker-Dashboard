@@ -1,5 +1,4 @@
 "use client";
-
 import { useTransactionStore } from "@/store/useTransactionStore";
 import { Pie } from "react-chartjs-2";
 import {
@@ -13,11 +12,11 @@ import { PieChart } from "lucide-react";
 
 ChartJS.register(ArcElement, Tooltip, Legend, Colors);
 
-export const Chart = () => {
+export const Chart = () => {  // Removed the data prop since we're using store data
   const transactions = useTransactionStore((state) => state.transactions);
   const expenses = transactions.filter((tx) => tx.type === "expense");
 
-  //grouping by category
+  // Grouping by category
   const categoryTotals: Record<string, number> = {};
   expenses.forEach((tx) => {
     if (categoryTotals[tx.category]) {
@@ -27,7 +26,7 @@ export const Chart = () => {
     }
   });
 
-  const data = {
+  const chartData = {  // Renamed from 'data' to 'chartData'
     labels: Object.keys(categoryTotals),
     datasets: [
       {
@@ -70,6 +69,7 @@ export const Chart = () => {
       },
     },
   };
+
   return (
     <div className="bg-white/80 backdrop-blur-sm p-8 rounded-2xl shadow-lg border border-white/20">
       <div className="flex items-center gap-3 mb-6">
@@ -81,7 +81,7 @@ export const Chart = () => {
       
       {expenses.length > 0 ? (
         <div className="h-80">
-          <Pie data={data} options={options} />
+          <Pie data={chartData} options={options} />  {/* Changed to chartData */}
         </div>
       ) : (
         <div className="h-80 flex items-center justify-center">
