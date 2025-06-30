@@ -1,8 +1,9 @@
-'use client'
-import { useTransactionStore } from '@/store/useTransactionStore'
+"use client";
+import { useTransactionStore } from "@/store/useTransactionStore";
 
+//testing the zustand store
 export default function TestComponent() {
-  const { transactions, addTransaction } = useTransactionStore()
+  const { transactions, addTransaction } = useTransactionStore();
 
   return (
     <div className="mt-4">
@@ -11,13 +12,12 @@ export default function TestComponent() {
         onClick={() =>
           addTransaction({
             id: crypto.randomUUID(),
-            type: 'income',
-            category: 'Freelance',
+            type: "income",
+            category: "Freelance",
             amount: 200,
             date: new Date().toISOString(),
           })
-        }
-      >
+        }>
         Add Dummy Transaction
       </button>
 
@@ -25,5 +25,5 @@ export default function TestComponent() {
         {JSON.stringify(transactions, null, 2)}
       </pre>
     </div>
-  )
+  );
 }
