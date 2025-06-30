@@ -1,4 +1,5 @@
 import { create } from "zustand";
+import { persist } from "zustand/middleware";
 
 // Defines the shape of each item
 export type Transaction = {
@@ -20,7 +21,7 @@ type State = {
   deleteTransaction: (id: string) => void;
 };
 
-export const useTransactionStore = create<State>((set) => ({
+export const useTransactionStore = create<State>()(persist((set) => ({
   transactions: [],
 
   addTransaction: (transaction) =>
@@ -32,4 +33,6 @@ export const useTransactionStore = create<State>((set) => ({
     set((state) => ({
       transactions: state.transactions.filter((tx) => tx.id !== id),
     })),
-}));
+    
+}),{name:'expense-tracker-store', // key in localStorage
+        }));
