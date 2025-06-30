@@ -18,9 +18,8 @@ A responsive and modern expense tracker web app built with **Next.js**, **Zustan
 
 ## 🖼️ Demo
 
-> **Live Preview:** [https://your-vercel-link.vercel.app](#)
+> **Live Preview:** [https://expense-tracker-dashboard-brown.vercel.app/](#)
 
-*(replace with your actual link once deployed)*
 
 ---
 
