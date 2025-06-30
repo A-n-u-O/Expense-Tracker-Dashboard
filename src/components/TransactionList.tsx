@@ -1,9 +1,18 @@
 "use client";
 
 import { useTransactionStore } from "@/store/useTransactionStore";
+import { useEffect, useState } from "react";
 
 export const TransactionList = () => {
   const { transactions, deleteTransaction } = useTransactionStore();
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  if(!isMounted) return null
+
   if (transactions.length === 0) {
     return (
       <div className=" text-gray-500 text-center mt-4">
@@ -12,7 +21,7 @@ export const TransactionList = () => {
     );
   }
   return (
-    <div className=" mt-6 w-full max-w-md space-y-4">
+    <div className=" mt-6 ml-5 w-full max-w-md space-y-4">
       <h2 className=" text-lg font-semibold text-gray-800">Transactions</h2>
       {transactions.map((tx) => (
         <div
@@ -25,7 +34,9 @@ export const TransactionList = () => {
           <div>
             <p className=" font-semibold">{tx.category}</p>
             <p className=" text-sm text-gray-600">
-              {new Date(tx.date).toDateString()}
+              {typeof window !== "undefined"
+                ? new Date(tx.date).toDateString()
+                : tx.date}
             </p>
           </div>
           <div className=" text-right">

@@ -1,7 +1,7 @@
 "use client";
 
 import { useTransactionStore } from "@/store/useTransactionStore";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export const AddTransactionForm = () => {
   const addTransaction = useTransactionStore((state) => state.addTransaction);
@@ -11,17 +11,20 @@ export const AddTransactionForm = () => {
   const [amount, setAmount] = useState("");
   const [date, setDate] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+    setDate(new Date().toISOString().split("T")[0]);
+  }, []);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
     if (!category || !amount || !date) return alert("Please fill all fields.");
 
-    //only generate id on client side
-    const id = typeof window !== "undefined" ? crypto.randomUUID() : "";
-
     addTransaction({
-      id,
+      id: crypto.randomUUID(),
       type,
       category,
       amount: parseFloat(amount),
@@ -30,17 +33,15 @@ export const AddTransactionForm = () => {
 
     //Show success message
     setSuccessMessage("Transaction added successfully!");
-
     // Hide after 3 seconds
     setTimeout(() => setSuccessMessage(""), 5000);
 
     // Reset Form
-    setType("expense");
     setCategory("");
     setAmount("");
-    setDate("");
   };
 
+  if (!isMounted) return null;
   return (
     <form
       onSubmit={handleSubmit}
