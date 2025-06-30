@@ -9,24 +9,21 @@ import {
   Colors,
 } from "chart.js";
 import { PieChart } from "lucide-react";
+import type { TooltipItem } from 'chart.js';
 
 ChartJS.register(ArcElement, Tooltip, Legend, Colors);
 
-export const Chart = () => {  // Removed the data prop since we're using store data
+export const Chart = () => {
   const transactions = useTransactionStore((state) => state.transactions);
   const expenses = transactions.filter((tx) => tx.type === "expense");
 
   // Grouping by category
   const categoryTotals: Record<string, number> = {};
   expenses.forEach((tx) => {
-    if (categoryTotals[tx.category]) {
-      categoryTotals[tx.category] += tx.amount;
-    } else {
-      categoryTotals[tx.category] = tx.amount;
-    }
+    categoryTotals[tx.category] = (categoryTotals[tx.category] || 0) + tx.amount;
   });
 
-  const chartData = {  // Renamed from 'data' to 'chartData'
+  const chartData = {
     labels: Object.keys(categoryTotals),
     datasets: [
       {
@@ -62,7 +59,7 @@ export const Chart = () => {  // Removed the data prop since we're using store d
         bodyColor: 'white',
         cornerRadius: 8,
         callbacks: {
-          label: function(context: any) {
+          label: function(context: TooltipItem<'pie'>) {
             return `${context.label}: ₦${context.parsed.toLocaleString()}`;
           }
         }
@@ -81,7 +78,7 @@ export const Chart = () => {  // Removed the data prop since we're using store d
       
       {expenses.length > 0 ? (
         <div className="h-80">
-          <Pie data={chartData} options={options} />  {/* Changed to chartData */}
+          <Pie data={chartData} options={options} />
         </div>
       ) : (
         <div className="h-80 flex items-center justify-center">
